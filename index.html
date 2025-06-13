@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dr. Sarah Johnson - Cardiology Specialist</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .portfolio {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .doctor-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+            color: white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .header h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+
+        .header .specialty {
+            color: #7f8c8d;
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-bottom: 30px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #555;
+            font-weight: 500;
+            background: rgba(102, 126, 234, 0.1);
+            padding: 8px 15px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            background: rgba(102, 126, 234, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .about-section {
+            margin-bottom: 40px;
+            padding: 30px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            border-left: 5px solid #667eea;
+        }
+
+        .about-section h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+
+        .about-section p {
+            font-size: 1.1em;
+            line-height: 1.8;
+            color: #555;
+        }
+
+        .schedule-section {
+            margin-top: 40px;
+        }
+
+        .schedule-section h2 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-size: 2em;
+            position: relative;
+        }
+
+        .schedule-section h2:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+
+        .sync-status {
+            text-align: center;
+            margin-bottom: 20px;
+            padding: 10px;
+            border-radius: 10px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .sync-status.loading {
+            background: rgba(243, 156, 18, 0.1);
+            color: #f39c12;
+            border: 1px solid #f39c12;
+        }
+
+        .sync-status.success {
+            background: rgba(39, 174, 96, 0.1);
+            color: #27ae60;
+            border: 1px solid #27ae60;
+        }
+
+        .sync-status.error {
+            background: rgba(231, 76, 60, 0.1);
+            color: #e74c3c;
+            border: 1px solid #e74c3c;
+        }
+
+        .schedule-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .schedule-card {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .schedule-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.3);
+        }
+
+        .schedule-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .schedule-card h3 {
+            margin-bottom: 20px;
+            font-size: 1.4em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .schedule-item {
+            margin-bottom: 15px;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .schedule-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .schedule-item:hover {
+            padding-left: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+        }
+
+        .day {
+            font-weight: bold;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+
+        .time, .location-info, .notes-info {
+            font-size: 0.95em;
+            opacity: 0.9;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .no-schedule {
+            text-align: center;
+            padding: 60px 30px;
+            background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+            color: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(255, 107, 107, 0.2);
+        }
+
+        .no-schedule h3 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+
+        .no-schedule p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .services-section {
+            margin-top: 40px;
+            padding: 30px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            border-radius: 15px;
+            color: white;
+        }
+
+        .services-section h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 1.8em;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .service-item {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .service-item:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-5px);
+        }
+
+        .service-icon {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+        }
+
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            padding: 30px;
+            background: #2c3e50;
+            color: white;
+            border-radius: 15px;
+        }
+
+        .footer h3 {
+            margin-bottom: 15px;
+            color: #ecf0f1;
+        }
+
+        .footer p {
+            opacity: 0.8;
+            line-height: 1.6;
+        }
+
+        .refresh-button {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+            margin: 10px auto;
+            display: block;
+            transition: all 0.3s ease;
+        }
+
+        .refresh-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+
+            .portfolio {
+                padding: 20px;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .schedule-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header h1 {
+                font-size: 2em;
+            }
+
+            .about-section {
+                padding: 20px;
+            }
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from { 
+                opacity: 0; 
+                transform: translateY(20px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .loading {
+            animation: pulse 1.5s infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="portfolio">
+            <div class="header">
+                <div class="doctor-image">👩‍⚕️</div>
+                <h1>Dr. Sarah Johnson</h1>
+                <p class="specialty">Cardiology Specialist</p>
+                
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <span>📞</span>
+                        <span>+1 (555) 123-4567</span>
+                    </div>
+                    <div class="contact-item">
+                        <span>📧</span>
+                        <span>dr.sarah@hospital.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <span>📍</span>
+                        <span>City General Hospital</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="about-section">
+                <h2>About Dr. Sarah Johnson</h2>
+                <p>
+                    Dr. Sarah Johnson is a highly experienced cardiologist with over 15 years of practice in cardiovascular medicine. 
+                    She specializes in interventional cardiology, heart disease prevention, and cardiac rehabilitation. 
+                    Dr. Johnson is committed to providing personalized, compassionate care to help patients achieve optimal heart health.
+                </p>
+            </div>
+
+            <div class="schedule-section">
+                <h2>Schedule & Availability</h2>
+                
+                <div class="sync-status loading" id="sync-status">
+                    📡 Loading schedule from database...
+                </div>
+
+                <button class="refresh-button" onclick="refreshSchedule()">
+                    🔄 Refresh Schedule
+                </button>
+
+                <div class="schedule-grid" id="schedule-container">
+                    <!-- Schedule will be populated here -->
+                    <div class="schedule-card loading">
+                        <h3>📅 Loading...</h3>
+                        <div class="schedule-item">
+                            <div class="day">Please wait while we load the latest schedule...</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="services-section">
+                <h2>Services Offered</h2>
+                <div class="services-grid">
+                    <div class="service-item">
+                        <div class="service-icon">🫀</div>
+                        <h3>Cardiac Consultation</h3>
+                        <p>Comprehensive heart health evaluation and diagnosis</p>
+                    </div>
+                    <div class="service-item">
+                        <div class="service-icon">🩺</div>
+                        <h3>Preventive Cardiology</h3>
+                        <p>Risk assessment and prevention strategies</p>
+                    </div>
+                    <div class="service-item">
+                        <div class="service-icon">⚡</div>
+                        <h3>Emergency Care</h3>
+                        <p>24/7 cardiac emergency services</p>
+                    </div>
+                    <div class="service-item">
+                        <div class="service-icon">🏃‍♂️</div>
+                        <h3>Cardiac Rehabilitation</h3>
+                        <p>Post-treatment recovery and fitness programs</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer">
+                <h3>Book an Appointment</h3>
+                <p>
+                    Ready to take care of your heart health? Contact us today to schedule your consultation. 
+                    We accept most insurance plans and offer flexible scheduling options.
+                </p>
+                <p style="margin-top: 15px; font-size: 0.9em;">
+                    📞 Call: +1 (555) 123-4567 | 📧 Email: dr.sarah@hospital.com
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Google Apps Script URL - MUST match your deployed admin panel URL
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxsQnfwR6OajXFrvYxWgoATzeAQkUPTJTX7scUL9uWKvtEXOrgVTcCuy9j5YaUrsWWS/exec';
+        
+        // Store schedule data
+        let scheduleData = [];
+        let isLoading = false;
+
+        // Update sync status
+        function updateSyncStatus(status, message) {
+            const statusElement = document.getElementById('sync-status');
+            statusElement.className = `sync-status ${status}`;
+            statusElement.innerHTML = message;
+        }
+
+        // Fetch schedule data from Google Sheets
+        async function fetchScheduleData() {
+            if (isLoading) return;
+            
+            isLoading = true;
+            updateSyncStatus('loading', '📡 Syncing with database...');
+
+            try {
+                const response = await fetch(GOOGLE_SCRIPT_URL + '?action=get&t=' + Date.now(), {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+
+                const data = await response.json();
+                
+                if (data.status === 'success') {
+                    scheduleData = data.data || [];
+                    updateSyncStatus('success', `✅ Schedule updated (${scheduleData.length} appointments)`);
+                    renderSchedule();
+                } else {
+                    throw new Error(data.message || 'Unknown error occurred');
+                }
+            } catch (error) {
+                console.error('Error fetching schedule:', error);
+                updateSyncStatus('error', `❌ Failed to sync: ${error.message}`);
+                renderSchedule(); // Show empty state
+            } finally {
+                isLoading = false;
+            }
+        }
+
+        // Render schedule on the page
+        function renderSchedule() {
+            const container = document.getElementById('schedule-container');
+            
+            if (!scheduleData || scheduleData.length === 0) {
+                container.innerHTML = `
+                    <div class="no-schedule">
+                        <h3>📅 No Schedule Available</h3>
+                        <p>Please contact us directly for appointments and consultation availability.</p>
+                        <p style="margin-top: 15px; font-size: 0.9em;">
+                            📞 +1 (555) 123-4567 | 📧 dr.sarah@hospital.com
+                        </p>
+                    </div>
+                `;
+                return;
+            }
+
+            // Group schedules by location
+            const groupedSchedule = {};
+            scheduleData.forEach(item => {
+                const location = item.Location || item.location || 'Unknown Location';
+                if (!groupedSchedule[location]) {
+                    groupedSchedule[location] = [];
+                }
+                groupedSchedule[location].push(item);
+            });
+
+            // Generate HTML for each location
+            let html = '';
+            Object.keys(groupedSchedule).forEach(location => {
+                html += `
+                    <div class="schedule-card">
+                        <h3>📍 ${location}</h3>
+                `;
+
+                // Sort schedules by day of week
+                const dayOrder = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+                const sortedSchedules = groupedSchedule[location].sort((a, b) => {
+                    const dayA = a.Day || a.day || '';
+                    const dayB = b.Day || b.day || '';
+                    return dayOrder.indexOf(dayA) - dayOrder.indexOf(dayB);
+                });
+
+                sortedSchedules.forEach(schedule => {
+                    const day = schedule.Day || schedule.day || 'Unknown Day';
+                    const time = schedule.Time || schedule.time || 'Time TBD';
+                    const room = schedule.Room || schedule.room;
+                    const notes = schedule.Notes || schedule.notes;
+
+                    html += `
+                        <div class="schedule-item">
+                            <div class="day">${day}</div>
+                            <div class="time">⏰ ${time}</div>
+                            ${room ? `<div class="location-info">🏢 ${room}</div>` : ''}
+                            ${notes ? `<div class="notes-info">📝 ${notes}</div>` : ''}
+                        </div>
+                    `;
+                });
+
+                html += `</div>`;
+            });
+
+            container.innerHTML = html;
+        }
+
+        // Refresh schedule manually
+        function refreshSchedule() {
+            fetchScheduleData();
+        }
+
+        // Initialize the page
+        function initializePage() {
+            console.log('Initializing Doctor Portfolio...');
+            
+            // Initial load
+            fetchScheduleData();
+            
+            // Set up automatic refresh every 30 seconds
+            setInterval(fetchScheduleData, 30000);
+            
+            // Refresh when page becomes visible (user switches back to tab)
+            document.addEventListener('visibilitychange', function() {
+                if (!document.hidden) {
+                    fetchScheduleData();
+                }
+            });
+
+            // Handle network connectivity
+            window.addEventListener('online', function() {
+                updateSyncStatus('success', '🌐 Connection restored - refreshing schedule...');
+                setTimeout(fetchScheduleData, 1000);
+            });
+
+            window.addEventListener('offline', function() {
+                updateSyncStatus('error', '⚠️ No internet connection - showing cached schedule');
+            });
+        }
+
+        // Handle errors gracefully
+        window.addEventListener('error', function(e) {
+            console.error('Page error:', e.error);
+            updateSyncStatus('error', '❌ Page error occurred - please refresh');
+        });
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', initializePage);
+
+        // Also initialize if DOM is already loaded
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initializePage);
+        } else {
+            initializePage();
+        }
+
+        console.log('Doctor Portfolio JavaScript loaded successfully');
+    </script>
+</body>
+</html>
